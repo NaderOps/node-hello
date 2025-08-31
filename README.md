@@ -45,7 +45,7 @@ The project demonstrates:
    terraform init
    ```
 
-2. Initialize Terraform:
+2. Export needed environment variables:
    ```bash
     export TF_VAR_newrelic_license_key="YOUR_NEW_RELIC_KEY"
     export TF_VAR_dockerhub_username="YOUR_DOCKERHUB_USERNAME"
