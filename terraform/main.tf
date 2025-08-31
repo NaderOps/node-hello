@@ -26,7 +26,7 @@ resource "docker_image" "newrelic_infra_agent" {
 
 resource "docker_container" "newrelic_infra_agent" {
   name  = "fluentbit-service"
-  image = docker_image.fluent_bit.name
+  image = docker_image.newrelic_infra_agent.name
   privileged = true
 
   env = [
