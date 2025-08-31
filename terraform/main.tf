@@ -27,7 +27,13 @@ resource "docker_image" "newrelic_infra_agent" {
 resource "docker_container" "newrelic_infra_agent" {
   name  = "fluentbit-service"
   image = docker_image.newrelic_infra_agent.name
+
   privileged = true
+  network_mode = "host"
+  pid_mode     = "host"
+  capabilities {
+    add = ["SYS_PTRACE"]
+  }
 
   env = [
     "NRIA_LICENSE_KEY=${var.newrelic_license_key}",
@@ -46,6 +52,11 @@ resource "docker_container" "newrelic_infra_agent" {
   volumes {
     host_path      = "/"
     container_path = "/host"
+    read_only      = true
+  }
+  volumes {
+    host_path      = "${path.cwd}/newrelic-infra"
+    container_path = "/etc/newrelic-infra"
     read_only      = true
   }
 
